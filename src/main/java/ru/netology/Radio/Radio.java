@@ -1,19 +1,48 @@
 package ru.netology.Radio;
 
+import lombok.*;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+
 public class Radio {
+    private int numberOfStations = 10;
+    private int maxStation = numberOfStations - 1;
+    private int minStation = 0;
     private int currentStation;
+
+    private int maxVolume = 100;
+    private int minVolume = 0;
+
     private int currentVolume;
 
-    public void setStation(int newStation) {
-        if (newStation >= 0 & newStation <= 9) {
-            currentStation = newStation;
+    public Radio(int numberOfStations) {
+        this.numberOfStations = numberOfStations;
+    }
+    public void setHigherVolume() {
+        if (currentVolume < maxVolume) {
+            currentVolume++;
         }
     }
 
+    public void setLowerVolume() {
+        if (currentVolume > minVolume) {
+            currentVolume--;
+        }
+    }
+
+    public void setCurrentStation(int currentStation) {
+        if (currentStation >= 0 & currentStation < this.numberOfStations) {
+            this.currentStation = currentStation;
+        }
+
+
+    }
 
     public void nextStation() {
-
-        if (currentStation >= 9) {
+        maxStation = numberOfStations - 1;
+        if (currentStation >= maxStation) {
             currentStation = 0;
             return;
         } else {
@@ -22,35 +51,13 @@ public class Radio {
     }
 
     public void prevStation() {
-
+        maxStation = numberOfStations - 1;
         if (currentStation <= 0) {
-            currentStation = 9;
+            currentStation = maxStation;
             return;
         } else {
             currentStation--;
         }
     }
 
-    public int getStation() {
-        return currentStation;
-    }
-
-
-    public void setHigherVolume() {
-        if (currentVolume < 10) {
-            currentVolume++;
-        }
-    }
-
-    public void setLowerVolume() {
-        if (currentVolume > 0) {
-            currentVolume--;
-        }
-    }
-
-    public int getCurrentVolume() {
-        return currentVolume;
-    }
 }
-
-
